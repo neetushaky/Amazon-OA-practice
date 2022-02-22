@@ -16,12 +16,12 @@ int stockPrice(vector<int>& sp)
     {
         k+=sp[i];
         sum-=sp[i];
-        int avg1=k/(i+1);
-        int avg2=sum/(n-(i+1));
-        int netPrice=abs(avg1-avg2);
+        int avg1=k/(i+1); /;eft prefix average
+        int avg2=sum/(n-(i+1)); //right prefix average
+        int netPrice=abs(avg1-avg2); //absolute value of the sub of avg1 and avg2
         if(netPrice < minNetPrice)
         {
-            minNetPrice= netPrice;
+            minNetPrice= netPrice; //returning the least price month
             month=i+1;
         }
     }
