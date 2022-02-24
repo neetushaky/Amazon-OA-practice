@@ -1,0 +1,76 @@
+Given a string, what is the minimum number of adjacent swaps required to convert a string into a palindrome. If not possible, return -1.
+
+Example 1:
+
+Input: "mamad"
+Output: 3
+Example 2:
+
+Input: "asflkj"
+Output: -1
+Example 3:
+
+Input: "aabb"
+Output: 2
+Example 4:
+
+Input: "ntiin"
+Output: 1
+Explanation: swap 't' with 'i' => "nitin"
+
+Code:
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+bool couldBeP(string s) {
+    map<char, int> res;
+    for (auto v:s) {
+        res[v]++;
+    }
+    auto it=res.begin();
+    int signle=0;
+    while(it!=res.end()) {
+        if (it->second%2!=0) {
+            signle++;
+        }
+        it++;
+    }
+    return signle<=1;
+}
+
+
+int minSwap(string s){
+    int totalSwap=0;
+    if(!couldBeP(s)){
+        return -1;
+    }
+    int i=0;
+    int j=s.length()-1;
+    while(i<j){
+        int k=j;
+        while(k>=0 && s[k]!=s[i]){
+            k--;
+        }
+        if(i!=k &&s[k]==s[i]){
+            while(j>k){
+                swap(s[k],s[k+1]);
+                k++;
+                totalSwap++;
+            }
+            j--;
+            i++;
+        }
+        else{
+            swap(s[i],s[i+1]);
+            totalSwap++;
+        }
+    }
+    return totalSwap;
+    
+}
+
+int main() {
+	string s="asflkj";
+	cout<<minSwap(s);
+	return 0;
+}
